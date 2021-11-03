@@ -2,8 +2,8 @@
  * @Author: GZH
  * @Date: 2021-11-03 09:48:53
  * @LastEditors: GZH
- * @LastEditTime: 2021-11-03 09:51:46
- * @FilePath: \Vue-music-next\src\components\header\header.vue
+ * @LastEditTime: 2021-11-03 20:14:02
+ * @FilePath: \vue-music-next\src\components\header\header.vue
  * @Description:
 -->
 <template>

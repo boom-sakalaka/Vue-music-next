@@ -2,10 +2,11 @@
  * @Author: GZH
  * @Date: 2021-11-02 23:25:26
  * @LastEditors: GZH
- * @LastEditTime: 2021-11-02 23:44:20
+ * @LastEditTime: 2021-11-03 21:13:29
  * @FilePath: \vue-music-next\vue.config.js
  * @Description:
  */
+const registerRouter = require('./backend/router');
 
 module.exports = {
   css: {
@@ -17,6 +18,11 @@ module.exports = {
           @import "@/assets/scss/mixin.scss";
         `,
       },
+    },
+  },
+  devServer: {
+    before(app) {
+      registerRouter(app);
     },
   },
 };

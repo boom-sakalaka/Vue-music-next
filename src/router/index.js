@@ -1,19 +1,33 @@
+/*
+ * @Author: GZH
+ * @Date: 2021-11-02 23:19:22
+ * @LastEditors: GZH
+ * @LastEditTime: 2021-11-03 21:02:57
+ * @FilePath: \vue-music-next\src\router\index.js
+ * @Description:
+ */
 import { createRouter, createWebHashHistory } from 'vue-router';
-import Home from '../views/Home.vue';
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    redirect: '/recommend',
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    path: '/recommend',
+    component: () => import(/* webpackChunkName: "recommend" */ '../views/recommend.vue'),
+  },
+  {
+    path: '/singer',
+    component: () => import(/* webpackChunkName: "Singer" */ '../views/singer.vue'),
+  },
+  {
+    path: '/top-list',
+    component: () => import(/* webpackChunkName: "TopList" */ '../views/top-list.vue'),
+  },
+  {
+    path: '/search',
+    component: () => import(/* webpackChunkName: "Search" */ '../views/search.vue'),
   },
 ];
 
