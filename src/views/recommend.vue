@@ -2,7 +2,7 @@
  * @Author: GZH
  * @Date: 2021-11-03 20:57:52
  * @LastEditors: GZH
- * @LastEditTime: 2021-11-04 20:47:16
+ * @LastEditTime: 2021-11-04 21:18:51
  * @FilePath: \vue-music-next\src\views\recommend.vue
  * @Description:
 -->
@@ -20,7 +20,7 @@
           <ul>
             <li v-for="item in albums" class="item" :key="item.id">
               <div class="icon">
-                <img width="60" height="60" :src="item.pic" />
+                <img width="60" height="60" v-lazy="item.pic" :src="item.pic" />
               </div>
               <div class="text">
                 <h2 class="name">
