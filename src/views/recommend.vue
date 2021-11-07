@@ -2,12 +2,12 @@
  * @Author: GZH
  * @Date: 2021-11-03 20:57:52
  * @LastEditors: GZH
- * @LastEditTime: 2021-11-04 21:18:51
+ * @LastEditTime: 2021-11-07 21:31:38
  * @FilePath: \vue-music-next\src\views\recommend.vue
  * @Description:
 -->
 <template>
-  <div class="recommend">
+  <div class="recommend" v-loading:[loadingText]="loading">
     <Scroll class="recommend-content">
       <div>
         <div class="slider-wrapper">
