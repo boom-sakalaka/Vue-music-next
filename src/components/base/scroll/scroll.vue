@@ -2,7 +2,7 @@
  * @Author: GZH
  * @Date: 2021-11-04 20:45:07
  * @LastEditors: GZH
- * @LastEditTime: 2021-11-04 20:46:31
+ * @LastEditTime: 2021-11-11 22:17:10
  * @FilePath: \vue-music-next\src\components\base\scroll\scroll.vue
  * @Description:
 -->
@@ -23,13 +23,19 @@ export default {
       type: Boolean,
       default: true,
     },
+    probeType: {
+      type: Number,
+      default: 0,
+    },
   },
-  setup(props) {
+  emits: ['scroll'],
+  setup(props, { emit }) {
     const rootRef = ref(null);
-    useScroll(rootRef, props);
+    const scroll = useScroll(rootRef, props, emit);
 
     return {
       rootRef,
+      scroll,
     };
   },
 };

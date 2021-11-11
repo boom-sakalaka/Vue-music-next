@@ -2,12 +2,12 @@
  * @Author: GZH
  * @Date: 2021-11-03 20:57:52
  * @LastEditors: GZH
- * @LastEditTime: 2021-11-04 21:53:37
+ * @LastEditTime: 2021-11-11 21:03:55
  * @FilePath: \vue-music-next\src\views\Singer.vue
  * @Description:
 -->
 <template>
-  <div class="singer">
+  <div class="singer" v-loading="!singers.length">
     <index-list :data="singers"></index-list>
   </div>
 </template>

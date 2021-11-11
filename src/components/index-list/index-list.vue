@@ -2,14 +2,16 @@
  * @Author: GZH
  * @Date: 2021-11-04 21:40:42
  * @LastEditors: GZH
- * @LastEditTime: 2021-11-04 21:48:07
- * @FilePath: \vue-music-next\src\components\base\index-list\index-list.vue
+ * @LastEditTime: 2021-11-11 22:10:01
+ * @FilePath: \vue-music-next\src\components\index-list\index-list.vue
  * @Description:
 -->
 
 <script setup>
 /* eslint-disable no-undef */
 import Scroll from '@/components/base/scroll/scroll.vue';
+import useFixed from '@/components/index-list/use-fixed';
+import useShortcut from '@/components/index-list/use-shortcut';
 
 const props = defineProps({
   data: {
@@ -17,11 +19,18 @@ const props = defineProps({
     default: () => [],
   },
 });
+
+const { groupRef, onScroll, fixedTitle, fixedStyle, currentIndex } = useFixed(props);
+const { shortcutList, scrollRef, onShortcutTouchStart, onShortcutTouchMove } = useShortcut(
+  props,
+  // eslint-disable-next-line comma-dangle
+  groupRef
+);
 </script>
 
 <template>
-  <Scroll class="index-list">
-    <ul>
+  <Scroll class="index-list" :probe-type="3" @scroll="onScroll" ref="scrollRef">
+    <ul ref="groupRef">
       <li v-for="group in props.data" :key="group.title" class="group">
         <h2 class="title">{{ group.title }}</h2>
         <ul>
@@ -32,6 +41,29 @@ const props = defineProps({
         </ul>
       </li>
     </ul>
+
+    <div class="fixed" v-show="fixedTitle" :style="fixedStyle">
+      <div class="fixed-title">{{ fixedTitle }}</div>
+    </div>
+
+    <div
+      class="shortcut"
+      @touchstart.stop.prevent="onShortcutTouchStart"
+      @touchmove.stop.prevent="onShortcutTouchMove"
+      @touchend.stop.prevent
+    >
+      <ul>
+        <li
+          v-for="(item, index) in shortcutList"
+          :key="item"
+          :data-index="index"
+          class="item"
+          :class="{ current: currentIndex === index }"
+        >
+          {{ item }}
+        </li>
+      </ul>
+    </div>
   </Scroll>
 </template>
 
@@ -42,6 +74,7 @@ const props = defineProps({
   height: 100%;
   overflow: hidden;
   background: $color-background;
+
   .group {
     padding-bottom: 30px;
 
@@ -69,6 +102,46 @@ const props = defineProps({
         margin-left: 20px;
         color: $color-text-l;
         font-size: $font-size-medium;
+      }
+    }
+  }
+
+  .fixed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    .fixed-title {
+      height: 30px;
+      line-height: 30px;
+      padding-left: 20px;
+      font-size: $font-size-small;
+      color: $color-text-l;
+      background: $color-highlight-background;
+    }
+  }
+
+  .shortcut {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    padding: 20px 0;
+    border-radius: 10px;
+    text-align: center;
+    background: $color-background-d;
+    font-family: Helvetica;
+
+    .item {
+      padding: 3px;
+      line-height: 1;
+      color: $color-text-l;
+      font-size: $font-size-small;
+
+      &.current {
+        color: $color-theme;
       }
     }
   }
